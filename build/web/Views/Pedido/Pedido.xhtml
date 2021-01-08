@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../plantilla/plantilla.xhtml">
+
+            <ui:define name="content">
+                <h2>Detalle de los pedidos</h2>
+                <h:form id="formMostrarPedidos">
+                    <p:dataTable id="tablaPedidos" paginator="true" style="text-align: center;" paginatorPosition="top" var="ped" value="#{pedidoBean.listaPedidos}" 
+                                 emptyMessage="No hay registros de clientes" widgetVar="tablaPedidosBuscar" filteredValue="#{pedidoBean.pedidosfiltrados}">
+                        
+                        <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Buscar Informacion:"/>
+                                <p:inputText id="globalFilter" onkeyup="PF('tablaPedidosBuscar').filter()" style="width: 150px;" placeholder="Buscar..."/>
+                            </p:outputPanel>
+                        </f:facet>
+                        
+                        <p:column headerText="Codigo Pedido" filterBy="#{ped.codDetalle}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <h:outputText value="#{ped.codDetalle}"/>
+                        </p:column>
+                        <p:column headerText="Codigo Factura" filterBy="#{ped.factura.codFactura}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <h:outputText value="#{ped.factura.codFactura}"/>
+                        </p:column>
+                        <p:column headerText="Codigo Producto" filterBy="#{ped.producto.codProducto}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <h:outputText value="#{ped.producto.codProducto}"/>
+                        </p:column>
+                        <p:column headerText="Codigo Serie" filterBy="#{ped.codBarra}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <h:outputText value="#{ped.codBarra}"/>
+                        </p:column>
+                        <p:column headerText="Nombre Prod" filterBy="#{ped.nombreProducto}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <h:outputText value="#{ped.nombreProducto}"/>
+                        </p:column>
+                        <p:column headerText="Cantidad">
+                            <h:outputText value="#{ped.cantidad}"/>
+                        </p:column>
+                        <p:column headerText="Precio">
+                            <h:outputText value="#{ped.precioVenta}"/>
+                        </p:column>
+                        <p:column headerText="Total">
+                            <h:outputText value="#{ped.total}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
